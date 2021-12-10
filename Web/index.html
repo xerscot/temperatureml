@@ -104,16 +104,16 @@
             window.f2cmodel = model;
         });
 
-        function predictc2f(input) {
-            let outcome = window.c2fmodel.predict(input).dataSync();
-            let celsius = document.getElementById("temperatureRequest").value;
-            $("small#choiceresult").text(celsius + ' Celcius is ' + outcome + ' Fahrenheit.');
+        function predictc2f(input) {            
+            let degrees = document.getElementById("temperatureRequest").value;
+            let outcome = window.c2fmodel.predict(tf.tensor([parseInt(degrees)], [1, 1])).dataSync();
+            $("small#choiceresult").text(degrees + ' Celcius is ' + parseFloat(outcome).toFixed(2) + ' Fahrenheit.');
         }
 
         function predictf2c(input) {
-            let outcome = window.f2cmodel.predict(input).dataSync();
-            let celsius = document.getElementById("temperatureRequest").value;
-            $("small#choiceresult").text(celsius + ' Fahrenheit is ' + outcome + ' Celsius.');
+            let degrees = document.getElementById("temperatureRequest").value;
+            let outcome = window.f2cmodel.predict(tf.tensor([parseInt(degrees)], [1, 1])).dataSync();            
+            $("small#choiceresult").text(degrees + ' Fahrenheit is ' + parseFloat(outcome).toFixed(2) + ' Celsius.');
         }
 
     </script>
